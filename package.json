@@ -1,0 +1,32 @@
+{
+  "name": "ie213",
+  "version": "1.0.0",
+  "description": "Do an cuoi ki",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangtuan-hcmuit/IE213.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "ExpressJs",
+    "Nodemon",
+    "Mongodb"
+  ],
+  "author": "anhtuan, minhsang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoangtuan-hcmuit/IE213/issues"
+  },
+  "homepage": "https://github.com/hoangtuan-hcmuit/IE213#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
