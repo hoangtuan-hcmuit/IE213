@@ -1,0 +1,20 @@
+/* change height of carousel */
+.carousel .carousel-item {
+    height: 600px;
+  }
+  
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 600px;
+}
+/* underline when active */
+.navbar-light .navbar-nav .active::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    content: " ";
+    border-bottom: 5px solid #636363;
+}
