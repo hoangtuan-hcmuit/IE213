@@ -24,9 +24,9 @@ app.get('', function(req, res) {
   res.render('index', {title: 'Home Page'});
 });
 
-app.get('/products', function(req, res) {
-  res.render('products', {title: 'Products', items:productRouter})
-})
+// app.get('/products', function(req, res) {
+//   res.render('products', {title: 'Products', items:productRouter})
+// })
 
 // Require product route
 const productRouter = require('./routes/product')

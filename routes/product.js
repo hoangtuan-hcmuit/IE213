@@ -4,7 +4,7 @@ const productRouter = express.Router()
 // Require product controller
 const productController = require('../controller/product');
 
-productRouter.get('/products', {items:productController.index})
+productRouter.get('/products', productController.index)
 
 // productRouter.get('/search', productController.search)
 
