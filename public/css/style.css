@@ -159,16 +159,12 @@ margin-right: 5px;
 .sign-in{
   padding-left: 40%;
   padding-right: 40%;
+}
 
-}
-.btn-center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .sign-up{
   padding-left: 40%;
   padding-right: 40%;
 
 }
+
 /* CSS Register */
