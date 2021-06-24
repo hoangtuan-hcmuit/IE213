@@ -1,6 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const expressLayouts = require('express-ejs-layouts')
+const bodyParser = require('body-parser');
+
+
 
 require('dotenv/config')
 
@@ -10,6 +13,8 @@ const app = express()
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
 
+//middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // set templating engine
 app.use(expressLayouts)

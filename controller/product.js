@@ -25,5 +25,13 @@ module.exports = {
           product: data
         });
       });
+    },
+    search: async function(req, res) {
+      await Product.find ({name: req.query}, function(err, data) {
+        res.render('products.ejs', {
+          title: 'Product',
+          products: data
+        });
+      });
     }
 };
