@@ -1,4 +1,4 @@
-const Product = require("../model/product");
+const Product = require("../model/product.model");
 
 module.exports = {
     index: async function(req, res) {
@@ -19,11 +19,10 @@ module.exports = {
       })
     },
     detail: async function(req, res) {
-      const product_id = req.params.id
-      await Product.findById(product_id, product => {
+      await Product.findOne({_id: req.params.id}, function(err, data) {
         res.render('detail.ejs', {
           title: 'Detail',
-          product: product
+          product: data
         });
       });
     }

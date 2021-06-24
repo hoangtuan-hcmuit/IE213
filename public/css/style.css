@@ -59,7 +59,16 @@
   text-shadow: 2px 2px 2px black;
 }
 
+.detail-img {
+  max-width: 400px;
+}
+
+/* ---------------------- */
 /* navbar style */
+.navbar {
+  padding: .5rem 0rem;
+}
+
 .separate {
   margin-top: 6px;
 }

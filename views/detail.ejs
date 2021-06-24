@@ -1,22 +1,21 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
-                <div class="project-info-box mt-0">
+            <div class="col-md-7 mt-5">
+                <div class="project-info-box mt-5">
                     <h5><%=product.name%></h5>
-                    <p class="mb-0">Vivamus pellentesque, felis in aliquam ullamcorper, lorem tortor porttitor erat, hendrerit porta nunc tellus eu lectus. Ut vel imperdiet est. Pellentesque condimentum, dui et blandit laoreet, quam nisi tincidunt tortor.</p>
+                    <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div><!-- / project-info-box -->
     
                 <div class="project-info-box">
-                    <p><b>Client:</b> CUPCAKE CO</p>
-                    <p><b>Date:</b> 14.02.2020</p>
-                    <p class="mb-0"><b>Price:</b><%=product.price%></p>
+                    <p class="mb-0 mt-3"><b>Price:</b><%=product.price%> vnd</p>
+                    <a href="#" class="btn btn-danger mt-3">Add to Cart</a>
                 </div><!-- / project-info-box -->
-    
+                
             </div><!-- / column -->
     
             <div class="col-md-5">
-                <img src="<%=product.image%>" alt="project-image" class="rounded">
+                <img src="<%=product.image%>" alt="project-image" class="detail-img">
                 <div class="project-info-box">
                     <p><b>Categories:</b><%=product.type%></p>
                 </div><!-- / project-info-box -->
