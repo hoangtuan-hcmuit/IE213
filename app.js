@@ -31,7 +31,7 @@ app.get('/signin', function(req, res) {
 })
 
 app.get('/signup', function(req, res) {
-  res.render('signin', {title: 'Sign in'});
+  res.render('signup', {title: 'Sign up'});
 })
 
 // Require product route
