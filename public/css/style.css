@@ -31,11 +31,17 @@
 
 .card {
   margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.card-img {
-  margin-left: auto;
-  margin-right: auto;
+/* align picture in product card */
+.img-link {
+  text-align: center;
+}
+
+.notify-text {
+  text-align: center;
+  width: 100%;
 }
 
 .card img {
@@ -61,6 +67,7 @@
 .navbar-brand {
   font-size: 2rem;
 }
+
 
 
 /* footer style */

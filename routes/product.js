@@ -6,6 +6,9 @@ const productController = require('../controller/product');
 
 productRouter.get('/products', productController.index)
 
+productRouter.get('/products/:type', productController.sort)
+
+productRouter.get('/products/detail/:id', productController.detail)
 // productRouter.get('/search', productController.search)
 
 // productRouter.get('/create', productController.get_create)

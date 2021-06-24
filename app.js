@@ -10,23 +10,16 @@ const app = express()
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
 
-// // set view directory 
-app.set('views', './views');
 
 // set templating engine
 app.use(expressLayouts)
 app.set('view engine', 'ejs');
 app.set('layout', './layouts/theme.ejs');
 
-
 // Router
 app.get('', function(req, res) {
   res.render('index', {title: 'Home Page'});
 });
-
-// app.get('/products', function(req, res) {
-//   res.render('products', {title: 'Products', items:productRouter})
-// })
 
 // Require product route
 const productRouter = require('./routes/product')
