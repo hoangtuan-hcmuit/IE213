@@ -26,6 +26,14 @@ app.get('', function(req, res) {
   res.render('index', {title: 'Home Page'});
 });
 
+app.get('/signin', function(req, res) {
+  res.render('signin', {title: 'Sign in'});
+})
+
+app.get('/signup', function(req, res) {
+  res.render('signin', {title: 'Sign in'});
+})
+
 // Require product route
 const productRouter = require('./routes/product')
 app.use('/', productRouter);
