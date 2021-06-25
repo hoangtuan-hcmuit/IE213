@@ -16,20 +16,22 @@ module.exports = {
           title: 'Product',
           products: data
         });
-      })
+      });
     },
+    // Thong tin san pham
     detail: async function(req, res) {
-      await Product.findOne({_id: req.params.id}, function(err, data) {
+      await Product.findOne({name: req.params.name}, function(err, data) {
         res.render('detail.ejs', {
           title: 'Detail',
           product: data
         });
       });
     },
+    // Tim kiem san pham
     search: async function(req, res) {
-      await Product.find ({name: req.query}, function(err, data) {
+      await Product.find({ $text: {$search: req.query.search}}, function(err, data) {
         res.render('products.ejs', {
-          title: 'Product',
+          title: 'Search',
           products: data
         });
       });

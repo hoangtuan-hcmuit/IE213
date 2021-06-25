@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -8,4 +8,6 @@ const productSchema = mongoose.Schema({
     image: String
 });
 
-module.exports = mongoose.model('Product', productSchema, 'product')
+productSchema.index({name: 'text'});
+
+module.exports = mongoose.model('Product', productSchema, 'product');

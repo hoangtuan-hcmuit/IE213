@@ -162,9 +162,10 @@ margin-right: 5px;
 
 }
 .btn-center{
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  text-align: center;
 }
 .sign-up{
   padding-left: 40%;

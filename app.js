@@ -34,6 +34,10 @@ app.get('/signup', function(req, res) {
   res.render('signup', {title: 'Sign up'});
 })
 
+// app.get('/products/search', function(req, res) {
+//   console.log(req.query.search)
+// })
+
 // Require product route
 const productRouter = require('./routes/product')
 app.use('/', productRouter);
@@ -41,10 +45,10 @@ app.use('/', productRouter);
 // connect to DB
 mongoose.connect(
   process.env.DB_CONNECTION, 
-  { useUnifiedTopology: true, useNewUrlParser: true }, 
+  { useUnifiedTopology: true, useNewUrlParser: true , useCreateIndex: true, useFindAndModify: false}, 
   () => console.log('Connected to DB')
 );
-
+console.log(mongoose.connection.readyState);
 app.listen(process.env.PORT, () => {
   console.log(`App listening at http://localhost:${process.env.PORT}`)
 })
