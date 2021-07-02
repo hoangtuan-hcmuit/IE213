@@ -1,16 +1,17 @@
 <!-- Boostrap 4 -->
 <section class="sign-in">
-    <form>
+    <%- include ('../partials/messages') %>
+    <form action="http://localhost:3000/users/login" method="POST">
         <div class="container">
                 <div class="form-group">
                 <h2 class="text-center">Login</h2>
-                <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" placeholder="Enter email">
+                <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter email">
                     <small id="emailHelp" class="form-text text-muted text-center">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" placeholder="Password">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                 </div>
                 <br>
                 <div class="text-center">
@@ -18,7 +19,7 @@
                 </div>
                 <br>
                 <div class="text-center">
-                    <p>You haven't registered yet? <a href="/signup">Register</a>.</p>
+                    <p>You haven't registered yet? <a href="/users/register">Register</a>.</p>
                 </div>
         </div>
     </form>

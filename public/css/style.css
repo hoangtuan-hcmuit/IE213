@@ -10,9 +10,9 @@
   min-height: 600px;
 }
 /* style nav-item right */
-.form-control {
+/* .form-control {
   border-radius: 20px;
-}
+} */
 
 .bag {
   margin-top: 2px;
@@ -69,9 +69,6 @@
   padding: .5rem 0rem;
 }
 
-.separate {
-  margin-top: 6px;
-}
 
 .navbar-brand {
   font-size: 2rem;
@@ -167,11 +164,15 @@ margin-right: 5px;
   align-items: center; */
   text-align: center;
 }
-
+/* CSS Register */
 .sign-up{
   padding-left: 40%;
   padding-right: 40%;
 
 }
 
-/* CSS Register */
+/* Dashboard */
+
+.nav-tabs {
+  border: none;
+}

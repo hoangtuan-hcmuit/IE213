@@ -1,11 +1,24 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const expressLayouts = require('express-ejs-layouts')
-const bodyParser = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
+const bodyParser = require("body-parser");
 
+require("dotenv").config()
 
+// Passport Config
+require('./config/passport')(passport);
 
-require('dotenv/config')
+// Require product route
+const productRouter = require('./routes/product');
+
+// Require user route
+const userRouter = require('./routes/user');
+
+// 
+const router = require('./routes/index');
 
 const app = express()
 
@@ -13,34 +26,52 @@ const app = express()
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
 
-//middleware
-app.use(bodyParser.urlencoded({ extended: true }));
+
+// middleware
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+
+// Express session
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {maxAge: 24*60*60*1000}
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user;
+  next();
+});
 
 // set templating engine
 app.use(expressLayouts)
 app.set('view engine', 'ejs');
 app.set('layout', './layouts/theme.ejs');
 
-// Router
-app.get('', function(req, res) {
-  res.render('index', {title: 'Home Page'});
-});
 
-app.get('/signin', function(req, res) {
-  res.render('signin', {title: 'Sign in'});
-})
 
-app.get('/signup', function(req, res) {
-  res.render('signup', {title: 'Sign up'});
-})
+app.use('/', router)
 
-// app.get('/products/search', function(req, res) {
-//   console.log(req.query.search)
-// })
-
-// Require product route
-const productRouter = require('./routes/product')
 app.use('/', productRouter);
+
+app.use('/users', userRouter);
+
 
 // connect to DB
 mongoose.connect(
@@ -48,7 +79,7 @@ mongoose.connect(
   { useUnifiedTopology: true, useNewUrlParser: true , useCreateIndex: true, useFindAndModify: false}, 
   () => console.log('Connected to DB')
 );
-console.log(mongoose.connection.readyState);
+
 app.listen(process.env.PORT, () => {
   console.log(`App listening at http://localhost:${process.env.PORT}`)
 })
