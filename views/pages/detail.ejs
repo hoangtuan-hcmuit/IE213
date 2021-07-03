@@ -1,5 +1,6 @@
 <section>
     <div class="container">
+        <%- include ('../partials/messages') %>
         <div class="row">
             <div class="col-md-7 mt-5">
                 <div class="project-info-box mt-5">
@@ -9,7 +10,7 @@
     
                 <div class="project-info-box">
                     <p class="mb-0 mt-3"><b>Price:</b><%=product.price%> vnd</p>
-                    <a href="#" class="btn btn-danger mt-3">Add to Cart</a>
+                    <a href="/add-to-cart/<%=product._id%>" class="btn btn-danger mt-3">Add to Cart</a>
                 </div><!-- / project-info-box -->
                 
             </div><!-- / column -->

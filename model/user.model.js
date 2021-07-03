@@ -5,6 +5,14 @@ const userSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    phone: {
+        type: String,
+        require: true,
+    },
+    location: {
+        type: String,
+        require: true
+    },
     email: {
         type: String,
         require: true
@@ -17,9 +25,6 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         require: true
-    },
-    accessToken: {
-        type: String
     }
 });
 

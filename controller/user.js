@@ -16,10 +16,10 @@ module.exports = {
 
     // Register
     register: function(req, res) {
-        const { name, email, password, password2 } = req.body;
+        const { name, phone, email, location, password, password2 } = req.body;
         let errors = [];
 
-        if (!name || !email || !password || !password2) {
+        if (!name || !phone || !email || !location || !password || !password2) {
             errors.push({msg: 'Please enter all fields'});
         }
 
@@ -36,26 +36,32 @@ module.exports = {
                 title: 'Register',
                 errors,
                 name,
+                phone,
                 email,
+                location,
                 password,
                 password2
             });
         } else {
-            User.findOne({ email: email}).then(user => {
+            User.findOne({ email: email} ).then(user => {
                 if (user) {
                     errors.push({msg: 'Email already exists'});
                     res.render('pages/register', {
                         title: 'Register',
                         errors,
                         name,
+                        phone,
                         email,
+                        location,
                         password,
                         password2
                     });
                 } else {
                     const newUser = new User({
                         name,
+                        phone,
                         email,
+                        location,
                         password
                     });
 
@@ -82,14 +88,14 @@ module.exports = {
     },
     login: function(req, res, next) {
         passport.authenticate('local', {
-            successRedirect: '/dashboard',
+            successRedirect: '/',
             failureRedirect: '/users/login',
             failureFlash: true
         })(req, res, next);
     },
     logout: function(req, res) {
-        req.logout();
-        req.flash('success_msg', 'You are logged out');
-        res.redirect('/users/login');
+        req.session.destroy(function(err) {
+            res.redirect('/users/login');
+        })
     }
 }

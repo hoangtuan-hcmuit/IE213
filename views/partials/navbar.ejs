@@ -27,10 +27,14 @@
                 </li>
                 <% if(user){%>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/dashboard">Dashboard</a>
+                    <a class="nav-link active" href="/profile">Profile</a>
                 </li>
                 <% } %>
-                
+                <% if (user.role == 'admin') {%>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/profile">Manage</a>
+                </li>
+                <% } %>
             </ul>
         </div>
         <div class="mx-auto order-0">
@@ -44,7 +48,7 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><img class="bag" src="../../images/shopping-bag.png" height="30" alt="Bag"></a>
+                    <a class="nav-link" href="/cart"><img class="bag" src="../../images/shopping-bag.png" height="30" alt="Bag"></a>
                 </li>
                 <% if (!user) { %>
                     <li class="nav-item ml-4">
