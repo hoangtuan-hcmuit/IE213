@@ -4,20 +4,16 @@ const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-const bodyParser = require("body-parser");
+// var MongoStore = require('connect-mongo')(session);
 
 require("dotenv").config()
 
 // Passport Config
 require('./config/passport')(passport);
 
-// Require product route
+// Require route
 const productRouter = require('./routes/product');
-
-// Require user route
 const userRouter = require('./routes/user');
-
-// 
 const router = require('./routes/index');
 
 const app = express()
@@ -36,7 +32,7 @@ app.use(express.urlencoded({
 // Express session
 app.use(
   session({
-    secret: 'secret',
+    secret: 'MySecret',
     resave: true,
     saveUninitialized: true,
     cookie: {maxAge: 24*60*60*1000}
@@ -64,8 +60,7 @@ app.use(expressLayouts)
 app.set('view engine', 'ejs');
 app.set('layout', './layouts/theme.ejs');
 
-
-
+//route
 app.use('/', router)
 
 app.use('/', productRouter);
