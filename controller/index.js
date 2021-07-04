@@ -21,17 +21,20 @@ module.exports = {
     },
     // update user info
     updateInfo: function (req, res) {
+        const path = req.file.path.replace(/\\/g,'/');
         User.findOneAndUpdate({email: req.body.email}, 
             {
                 name: req.body.name,
                 location: req.body.location,
                 phone: req.body.phone,
+                image: path
             }, function (err) {
                 if (err) res.json(err);
                 else {
                     res.redirect('/profile')
                 }
-            }); 
+                
+            });
     },
     // add to cart
     addToCart: async function (req, res) {

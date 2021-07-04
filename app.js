@@ -19,6 +19,7 @@ const router = require('./routes/index');
 const app = express()
 
 // Static files
+app.use('/uploads', express.static('uploads'));
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
 

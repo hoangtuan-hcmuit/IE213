@@ -29,12 +29,14 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/profile">Profile</a>
                 </li>
-                <% } %>
                 <% if (user.role == 'admin') {%>
                 <li class="nav-item">
+                    <!-- here need to fix -->
                     <a class="nav-link active" href="/profile">Manage</a>
                 </li>
                 <% } %>
+                <% } %>
+                
             </ul>
         </div>
         <div class="mx-auto order-0">

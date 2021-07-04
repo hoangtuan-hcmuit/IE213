@@ -2,10 +2,23 @@ const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    name: String,
+    name: {
+        type: String,
+        require: true
+    },
+    decription: {
+        type: String,
+        require: true
+    },
     price: Number,
-    type: String,
-    image: String
+    type: {
+        type: String,
+        require: true
+    },
+    image: {
+        type: String,
+        require: true
+    },
 });
 
 productSchema.index({name: 'text'});

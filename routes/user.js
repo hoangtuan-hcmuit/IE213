@@ -3,6 +3,7 @@ const userRouter = express.Router();
 const { forwardAuthenticated } = require("../config/auth");
 const userController = require("../controller/user");
 
+
 // Register page
 userRouter.get('/register', forwardAuthenticated, userController.registerPage);
 
