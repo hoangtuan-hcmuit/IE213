@@ -27,7 +27,7 @@ app.use('/css', express.static(__dirname + 'public/css'))
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({
-  extended: true
+  extended: false
 }));
 
 // Express session

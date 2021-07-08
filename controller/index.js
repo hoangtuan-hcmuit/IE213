@@ -17,24 +17,38 @@ module.exports = {
             title: 'Profile',
             // get user when login
             user: req.user
-        })
+        });
     },
     // update user info
-    updateInfo: function (req, res) {
-        const path = req.file.path.replace(/\\/g,'/');
-        User.findOneAndUpdate({email: req.body.email}, 
-            {
-                name: req.body.name,
-                location: req.body.location,
-                phone: req.body.phone,
-                image: path
-            }, function (err) {
-                if (err) res.json(err);
-                else {
-                    res.redirect('/profile')
-                }
-                
-            });
+    updateInfo: async function (req, res) {
+        if (! req.file) {
+            await User.findOneAndUpdate({email: req.body.email}, 
+                {
+                    name: req.body.name,
+                    location: req.body.location,
+                    phone: req.body.phone,
+                }, function (err) {
+                    if (err) res.json(err);
+                    else {
+                        req.flash('success_msg', 'User updated');
+                        res.redirect('/profile');
+                    }
+                });
+        } else {
+            User.findOneAndUpdate({email: req.body.email}, 
+                {
+                    name: req.body.name,
+                    location: req.body.location,
+                    phone: req.body.phone,
+                    image: '/'.concat(req.file.path.replace(/\\/g,'/'))
+                }, function (err) {
+                    if (err) res.json(err);
+                    else {
+                        req.flash('success_msg', 'User updated');
+                        res.redirect('/profile');
+                    }
+                });
+        }
     },
     // add to cart
     addToCart: async function (req, res) {
@@ -128,7 +142,7 @@ module.exports = {
         }
     },
     // remove each row
-    remove: async function(req, res, next) {
+    removeCartItem: async function(req, res, next) {
         const productId = req.params.id;
         let cart;
         try {
@@ -155,12 +169,29 @@ module.exports = {
                 req.session.cart = null;
                 await Cart.findByIdAndRemove(cart._id);
             }
+            req.flash(
+                'success_msg',
+                'Item deleted'
+            );
             res.redirect(req.headers.referer);
         } catch (err) {
             console.log(err);
             res.redirect('/');
         }
+    },
+    // GET: checkout thanh toan
+    checkoutPage: async function (req, res) {
+        if (!req.session.cart) {
+            return res.redirect('/cart');
+        }
+        // 
+        cart = await Cart.findById(req.session.cart._id);
+        res.render('/checkout', {
+            cart: cart,
+            title: 'Checkout',
+        })
     }
+
 };
 
 // create products array to store the info of each product in the cart

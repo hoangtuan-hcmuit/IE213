@@ -12,7 +12,7 @@ module.exports = {
     },
     // Sort theo type
     sort: async function(req, res) {
-      await Product.find({type: req.params.type}, function(err, data) {
+      await Product.find({type: req.params.type.toLowerCase()}, function(err, data) {
         res.render('pages/products.ejs', {
           title: 'Product',
           products: data,
