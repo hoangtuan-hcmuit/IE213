@@ -5,6 +5,8 @@ const { ensureAuthenticated, ensureRole } = require('../config/auth');
 // require controller
 const indexController = require("../controller/index");
 const admin = require("../controller/admin");
+const { index } = require('../controller/product');
+const { route } = require('./user');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -50,8 +52,16 @@ router.get('/cart', indexController.cartContent);
 // GET: remove each row cart
 router.get('/remove-cart-item/:id', indexController.removeCartItem);
 
+// GET: checkout
+router.get('/checkout',  ensureAuthenticated, indexController.checkoutPage);
+
+// POST: checkout
+router.post('/checkout', indexController.checkout);
+ 
 // Dashboard 
 router.get('/dashboard', ensureAuthenticated, ensureRole, admin.manage);
+
+
 
 // ----------------------------------------------
 //---------- User management

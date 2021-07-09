@@ -35,11 +35,7 @@ const orderSchema = mongoose.Schema({
                 }
             },
         ],
-        location: {
-            type: String,
-            require: true,
-        },
-        paymentId: {
+        address: {
             type: String,
             require: true,
         }

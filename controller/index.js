@@ -1,6 +1,8 @@
 const Cart = require("../model/cart.model");
 const Product = require("../model/product.model");
 const User = require("../model/user.model");
+const Order = require("../model/order.model");
+const user = require("./user");
 
 module.exports = {
     //render home page
@@ -185,13 +187,45 @@ module.exports = {
             return res.redirect('/cart');
         }
         // 
+        if (!req.user) {
+            req.flash('error_msg', 'You need to login to checkout')
+            return res.redirect('/cart')
+        }
         cart = await Cart.findById(req.session.cart._id);
-        res.render('/checkout', {
+        res.render('pages/checkout', {
             cart: cart,
+            user: req.user,
+            items: await productsFromCart(cart),
             title: 'Checkout',
-        })
+        });
+    },
+    // POST: checkout
+    checkout: async function (req, res) {
+        if (!req.session.cart) {
+            return res.redirect('/cart');
+        }
+        const cart = await Cart.findById(req.session.cart._id);
+        const order = new Order({
+            user: req.user,
+            cart: {
+                totalQty: cart.totalQty,
+                totalCost: cart.totalCost,
+                items: cart.items,
+            },
+            address: req.body.address
+        });
+        order.save(async (err, newOrder) => {
+            if (err) {
+                req.flash('error_msg', 'There were some errors when ordering');
+                return res.redirect('/checkout');
+            }
+            await cart.save();
+            await Cart.findByIdAndDelete(cart._id);
+            req.flash('success_msg', 'Successfully purchased');
+            req.session.cart = null;
+            res.redirect('/profile');
+        });
     }
-
 };
 
 // create products array to store the info of each product in the cart
