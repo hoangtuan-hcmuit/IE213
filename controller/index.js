@@ -2,7 +2,7 @@ const Cart = require("../model/cart.model");
 const Product = require("../model/product.model");
 const User = require("../model/user.model");
 const Order = require("../model/order.model");
-const user = require("./user");
+const nodemailer = require("nodemailer");
 
 module.exports = {
     //render home page
@@ -205,6 +205,19 @@ module.exports = {
             return res.redirect('/cart');
         }
         const cart = await Cart.findById(req.session.cart._id);
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'clo.shoptest@gmail.com',
+                pass: 'Anhvip23a'
+            }
+        });
+        const mailOptions = {
+            from: 'clo.shoptest@gmail.com',
+            to: req.user.email,
+            subject: 'Order successfully at Clo.',
+            text: 'This is an automated message from Clo. Thank you for ordering at Clo. See you again.'
+        };
         const order = new Order({
             user: req.user,
             cart: {
@@ -219,6 +232,13 @@ module.exports = {
                 req.flash('error_msg', 'There were some errors when ordering');
                 return res.redirect('/checkout');
             }
+            transporter.sendMail(mailOptions, function(err, info){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
             await cart.save();
             await Cart.findByIdAndDelete(cart._id);
             req.flash('success_msg', 'Successfully purchased');
@@ -239,3 +259,4 @@ async function productsFromCart(cart) {
     }
     return products;
 }
+
