@@ -46,9 +46,9 @@
                       <div class="form-group">
                           <div class="col-xs-6">
                             <label for="role"><h4>Role</h4></label>
-                            <select name="role" id="role" class="form-control" value="<%=user.role%>">
-                                <option>User</option>
-                                <option>Admin</option>
+                            <select name="role" id="role" class="form-control">
+                                <option <%- user.role == "User" ? "selected" : ""%>>User</option>
+                                <option <%- user.role == "Admin" ? "selected" : ""%>>Admin</option>
                             </select>
                           </div>
                       </div>
