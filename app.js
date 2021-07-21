@@ -4,7 +4,6 @@ const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-// var MongoStore = require('connect-mongo')(session);
 
 require("dotenv").config()
 
@@ -19,12 +18,12 @@ const router = require('./routes/index');
 const app = express()
 
 // Static files
-app.use('/uploads', express.static('uploads'));
-app.use(express.static('public'));
+app.use('/uploads', express.static('uploads')); // upload anh
+app.use(express.static('public')); // anh trong project
 app.use('/css', express.static(__dirname + 'public/css'))
 
 
-// middleware
+// middleware ~~ body parse
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false
@@ -36,7 +35,7 @@ app.use(
     secret: 'MySecret',
     resave: true,
     saveUninitialized: true,
-    cookie: {maxAge: 24*60*60*1000}
+    cookie: {maxAge: 24*60*60*1000} // 24 hour
   })
 );
 
